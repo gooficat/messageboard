@@ -1,3 +1,5 @@
 {
-    "dotnet.defaultSolution": "MessageBoard.slnx"
+    "dotnet.defaultSolution": "MessageBoard.slnx",
+    "files.insertFinalNewline": true,
+    "editor.insertSpaces": false
 }

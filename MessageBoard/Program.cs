@@ -7,17 +7,29 @@ public class MessageBoard
     {
         var options = new WebApplicationOptions
         {
-            WebRootPath = "../wwwroot",
+            ContentRootPath = "C:/Users/User/Documents/messageboard/wwwroot",
+            WebRootPath = "C:/Users/User/Documents/messageboard/wwwroot",
             Args = args,
             EnvironmentName = "Development"
         };
 
         var builder = WebApplication.CreateBuilder(options);
         var app = builder.Build();
-        app.MapGet("/", () => $"EnvironmentName: {app.Environment.EnvironmentName}\n" +
-        $"ApplicationName: {app.Environment.ApplicationName}\n" +
-        $"WebRootPath: {app.Environment.WebRootPath}\n" +
-        $"ContentRootPath: {app.Environment.ContentRootPath}");
+
+        var defaultFileOptions = new DefaultFilesOptions();
+
+        defaultFileOptions.DefaultFileNames.Clear();
+
+        defaultFileOptions.DefaultFileNames.Add("index.html");
+
+        app.UseDefaultFiles(defaultFileOptions);
+
+        app.UseStaticFiles();
+
+        app.Run(async (context) =>
+        {
+            await context.Response.WriteAsync("Request handled and response generated");
+        });
 
         app.Run();
     }
