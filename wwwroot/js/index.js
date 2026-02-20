@@ -1,13 +1,6 @@
-class SideBar extends HTMLElement {
+class Icon extends HTMLElement {
 	static observedAttributes = ["src"]
 
-	constructor() {
-		super()
-		// this.innerText = "Hello"
-	}
-}
-
-class ClickableIcon extends HTMLElement {
 	constructor() {
 		super()
 		this.img = document.createElement("img")
@@ -19,6 +12,5 @@ class ClickableIcon extends HTMLElement {
 	}
 }
 
-window.customElements.define("side-bar", SideBar)
-window.customElements.define("clickable-icon", ClickableIcon)
 
+customElements.define("icon-el", Icon)
