@@ -19,7 +19,8 @@ body {
     display: block;
 }
 
-input {
+input,
+textarea {
     background-color: #040420;
     color: white;
     width: 100%;
