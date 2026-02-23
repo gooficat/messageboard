@@ -1,0 +1,20 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	color: #ccc;
+}
+
+html, body {
+	background-color: #020213;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	gap: 1em;
+}
+
+.form-entry {
+	display: block;
+	gap: 3em;
+}
+
