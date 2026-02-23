@@ -1,44 +1,46 @@
 <!DOCTYPE html>
 <html>
 	<head>
-<?php
-	if (isset($_SESSION["LOGGED_IN"]) || $_SERVER['REQUEST_METHOD'] != 'POST') {
-		header("location: index.php");
-		exit;
-	}
-
-	$db = new SQLite3("MessageBoard.db");
-	
-	$_SESSION["USER_NAME"] = $_POST["name"];
-	
-	$check_exists_q = $db->prepare('SELECT * FROM users WHERE name = ?');
-	$check_exists_q->bindValue(1, $_POST["name"], SQLITE3_TEXT);
-	
-	$existing_users = $check_exists_q->execute();
-	
-	$users_row = $existing_users->fetchArray(SQLITE3_NUM);
-
-	if ($users_row != false) {
-		header("location: index.php");
-		exit;
-	}
-	
-	$insert_q = $db->prepare('INSERT INTO users (name, email, password) VALUES (?, ?, ?)');
-
-	$insert_q->bindValue(1, $_POST['name'], SQLITE3_TEXT);
-	$insert_q->bindValue(2, $_POST['email'], SQLITE3_TEXT);
-	$insert_q->bindValue(3, $_POST['password'], SQLITE3_TEXT);
-
-	$insert_q->execute();	
-
-	$db->close();
-?>
-
-	<link rel="stylesheet" href="css/style.css">
+		<title>Register</title>
 	</head>
 	<body>
+		<h1>Welcome</h1>
 
-	<h1><?php echo $_SESSION["USER_NAME"]; ?></h1>
+<h3>
 
+<?php
+
+try {
+	if ($_SERVER['REQUEST_METHOD'] == "POST") {
+		$db = new SQLite3("MessageBoard.db");
+
+		$register_check_exist_query = $db->prepare("SELECT * FROM users WHERE email = ?");
+		$register_check_exist_query->bindValue(1, $_POST["email"]);
+
+		if ($register_check_exist_query->execute()->fetchArray()) {
+			echo "Error: Email already in use.";
+		}
+		else {
+			echo "Sign up message";
+		}
+	}
+	else {
+		
+	}
+
+
+} catch (Exception $e) {
+	echo $e->getMessage();
+}
+
+?>
+</h3>
+
+		<form method="post">
+			<input type="text" name="email" placeholder="email">
+			<input type="text" name="username">
+			<input type="password" name="password">
+			<input type="submit">
+		</form>	
 	</body>
 </html>
