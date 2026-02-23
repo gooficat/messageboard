@@ -1,5 +1,12 @@
 <!DOCTYPE html>
-<?php session_start(); ?>
+<?php
+session_start();
+
+if (!isset($_COOKIE["USER_NAME"])) {
+    header("Location: login.php");
+}
+?>
+
 <html>
 	<head>
 		<title><?php echo $_COOKIE["USER_NAME"]; ?>'s profile</title>

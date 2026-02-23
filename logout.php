@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <?php
-unset($_COOKIE["USER_ID"]);
-unset($_COOKIE["USER_NAME"]);
+session_start();
+setcookie("USER_ID", "", time() - 3600);
+setcookie("USER_NAME", "", time() - 3600);
+session_unset();
+session_destroy();
 ?>
 <html>
 	<head>
