@@ -10,7 +10,28 @@
 			<?php
 
 				try {
-					
+					if ($_SERVER['REQUEST_METHOD'] == "POST") {
+						$db = new SQLite3("MessageBoard.db");
+
+						$login_find_user_query = $db->prepare("SELECT * FROM users WHERE username = ?");
+						$login_find_user_query->bindValue(1, $_POST["username"]);
+
+						$login_find_user_result = $login_find_user_query->execute();
+
+						$user_row = $login_find_user_result->fetchArray();
+						if ($user_row) {
+							if ($user_row["password"] != $_POST["password"]) {
+								echo "Incorrect password.";
+							}
+							else {
+								$_SESSION["USER_ID"] = $user_row["id"];
+								echo "You are now logged in!";
+							}						
+						}
+						else {
+							echo "Unknown username";
+						}
+					}
 				} catch (Exception $e) {
 					echo $e->getMessage();
 				}
