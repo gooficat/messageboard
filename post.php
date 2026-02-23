@@ -20,6 +20,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $make_post_query->bindValue(1, $_COOKIE["USER_ID"]);
     $make_post_query->bindValue(2, $_POST["content"]);
     $make_post_query->execute();
+
+    header("Location: profile.php?" . $_COOKIE["USER_NAME"]);
 }
 ?>
 <html>

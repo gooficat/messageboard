@@ -32,7 +32,6 @@
                ) {
                    echo "Error: Username already in use.";
                } else {
-                   echo "Sign up message";
                    $register_query = $db->prepare(
                        "INSERT INTO USERS (email, username, password) VALUES (?, ?, ?)",
                    );
@@ -41,6 +40,8 @@
                    $register_query->bindValue(3, $_POST["password"]);
 
                    $register_result = $register_query->execute();
+
+                   header("Location: login.php");
                }
            }
        }
