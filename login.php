@@ -2,7 +2,9 @@
 <html>
 	<head>
 <?php
-	if ($_SERVER['REQUEST_METHOD'] != 'POST') {
+	session_start();
+
+	if ($_SESSION['LOGGED_IN'] || $_SERVER['REQUEST_METHOD'] != 'POST') {
 		echo "<script>
 				window.location.href = '.';
 			</script>";

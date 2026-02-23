@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <?php
+	session_start();
 	try {
 		$db = new SQLite3('MessageBoard.db');
 
