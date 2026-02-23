@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <?php
-session_start();
-session_unset();
-session_destroy();
+unset($_COOKIE["USER_ID"]);
+unset($_COOKIE["USER_NAME"]);
 ?>
 <html>
 	<head>
