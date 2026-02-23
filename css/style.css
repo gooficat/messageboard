@@ -3,10 +3,11 @@
 	padding: 0;
 	box-sizing: border-box;
 	color: #ccc;
+	font-family: monospace;
 }
 
 html, body {
-	background-color: #020213;
+	background-color: #020205;
 	display: flex;
 	align-items: center;
 	flex-direction: column;

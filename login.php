@@ -2,6 +2,7 @@
 <html>
 	<head>
 		<title>Login</title>
+		<link rel="stylesheet" href="css/style.css">
 	</head>
 	<body>
 		<h1>Welcome Back</h1>
@@ -46,5 +47,6 @@
 			<input type="password" name="password">
 			<input type="submit">
 		</form>	
+		<a href="register.php">Register</a>
 	</body>
 </html>
