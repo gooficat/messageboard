@@ -15,6 +15,10 @@ html, body {
 
 .form-entry {
 	display: block;
-	gap: 3em;
 }
 
+input {
+	background-color: #040420;
+	color: white;
+	width: 100%;
+}

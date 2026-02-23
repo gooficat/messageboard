@@ -2,12 +2,8 @@
 <html>
 	<head>
 <?php
-	session_start();
-
-	if ($_SESSION['LOGGED_IN'] || $_SERVER['REQUEST_METHOD'] != 'POST') {
-		echo "<script>
-				window.location.href = '.';
-			</script>";
+	if ((isset($_SESSION['LOGGED_IN']) && $_SESSION['LOGGED_IN'] == true) || $_SERVER['REQUEST_METHOD'] != 'POST') {
+		header("location: index.php");
 		exit;
 	}
 
