@@ -11,6 +11,10 @@ $db = new SQLite3("MessageBoard.db");
 $url = $_SERVER["REQUEST_URI"];
 
 $username = parse_url($url, PHP_URL_QUERY);
+
+if (!isset($username)) {
+    $username = $_COOKIE["USER_NAME"];
+}
 ?>
 
 
