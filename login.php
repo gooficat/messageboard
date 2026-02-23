@@ -24,8 +24,10 @@
 								echo "Incorrect password.";
 							}
 							else {
+								session_start();
 								$_SESSION["USER_ID"] = $user_row["id"];
-								echo "You are now logged in!";
+								$_SESSION["USER_NAME"] = $user_row["username"];
+								header("location: profile.php");					
 							}						
 						}
 						else {
