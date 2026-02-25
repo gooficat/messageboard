@@ -12,17 +12,33 @@ html {
     background-color: #1d2021;
 }
 
-header {
-    display: flex;
+message-board-header {
+    display: inline-flex;
     padding: 0.7rem;
     background-color: #d79921;
     /*position: sticky;*/
     top: 0;
+    width: 100%;
+}
+
+message-board-header nav {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    justify-content: flex-end;
+    margin-right: 2rem;
+    flex: 1;
+}
+
+message-board-header nav a {
+    text-decoration: none;
 }
 
 main {
+    max-width: 800px;
     display: flex;
     min-height: 100%;
+    margin: 0 auto;
 }
 
 section,
@@ -33,7 +49,7 @@ footer {
 }
 
 .sidebar {
-    flex: 1;
+    flex: 0.5;
     background-color: #282828;
 }
 
@@ -68,7 +84,7 @@ footer {
 
 .user-description img {
     border-radius: 50%;
-    width: 48px;
+    width: 32px;
     height: auto;
 }
 
