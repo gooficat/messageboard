@@ -1,0 +1,23 @@
+{
+  "name": "messageboard",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/gooficat/messageboard#readme",
+  "bugs": {
+    "url": "https://github.com/gooficat/messageboard/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gooficat/messageboard.git"
+  },
+  "license": "ISC",
+  "author": "gooficat",
+  "type": "commonjs",
+  "main": "main.js",
+  "scripts": {
+    "test": "node main.js"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
