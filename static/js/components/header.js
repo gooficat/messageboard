@@ -4,10 +4,8 @@ class Header extends HTMLElement {
     this.innerHTML = `
 <h1>Message Board</h1>
 <nav>
-    <a href="index.html">Home</a>
-    <a href="#">About</a>
-    <a href="#">Contact</a>
-    <a href="login.html">Login</a>
+    <a href="/">Home</a>
+    <a href="login">Login</a>
 </nav>
 `;
   }
