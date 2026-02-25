@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <link rel="stylesheet" href="css/style.css" />
+        <link rel="stylesheet" href="css/login.css" />
+        <script type="module" src="js/components/header.js"></script>
+    </head>
+    <body>
+        <message-board-header></message-board-header>
+        <main>
+            <section class="login-form">
+                <form action="/login" method="post">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" required />
+                    <label for="password">Password:</label>
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        required
+                    />
+                    <input type="submit" value="Login" />
+                </form>
+                <a href="register.html">Register</a>
+            </section>
+        </main>
+        <footer>
+            <h4>Website by gooficat</h4>
+            <h6>(c) 2026</h6>
+        </footer>
+    </body>
+</html>
