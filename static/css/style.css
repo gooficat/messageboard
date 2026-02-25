@@ -47,10 +47,34 @@ footer {
 .content {
     flex: 4;
     background-color: #32302f;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #a89984;
+    padding: 0.8rem;
+    gap: 1rem;
+}
+
+.user-description {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.user-description img {
+    border-radius: 50%;
+    width: 48px;
+    height: auto;
 }
 
 footer {
     display: flex;
+    gap: 2rem;
     padding: 2rem;
     background-color: #3c3836;
     margin: 0;
