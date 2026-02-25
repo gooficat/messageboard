@@ -1,0 +1,34 @@
+.login-form {
+    flex-direction: column;
+    margin: 2rem auto;
+    background-color: #282828;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    margin: 0 auto;
+    align-items: center;
+    gap: 0.9rem;
+}
+
+input {
+    padding: 0.2rem;
+    color: #ebdbb2;
+    background-color: #1d2021;
+    border: 1px solid #fabd2f;
+    border-radius: 0.4rem;
+}
+
+input[type="submit"] {
+    padding: 0.2rem;
+    color: #ebdbb2;
+    background-color: #1d2021;
+    cursor: pointer;
+    width: 100%;
+}
