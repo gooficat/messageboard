@@ -1,26 +1,23 @@
 {
-  "name": "messageboard",
-  "version": "1.0.0",
-  "description": "",
-  "homepage": "https://github.com/gooficat/messageboard#readme",
-  "bugs": {
-    "url": "https://github.com/gooficat/messageboard/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/gooficat/messageboard.git"
-  },
-  "license": "ISC",
-  "author": "gooficat",
-  "type": "commonjs",
-  "main": "main.js",
-  "scripts": {
-    "test": "node main.js"
-  },
-  "dependencies": {
-    "express": "^5.2.1",
-    "express-session": "^1.19.0",
-    "mysql": "^2.18.1",
-    "path": "^0.12.7"
-  }
+	"name": "messageboard",
+	"version": "1.0.0",
+	"description": "",
+	"homepage": "https://github.com/gooficat/messageboard#readme",
+	"bugs": {
+		"url": "https://github.com/gooficat/messageboard/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/gooficat/messageboard.git"
+	},
+	"license": "ISC",
+	"author": "",
+	"type": "commonjs",
+	"main": "main.js",
+	"scripts": {
+		"test": "node main.js"
+	},
+	"dependencies": {
+		"express": ""
+	}
 }
