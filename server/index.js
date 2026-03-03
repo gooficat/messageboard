@@ -3,6 +3,11 @@ import express from "express";
 import { __dirname } from "./shared.js";
 import { join } from "path";
 import route from "./router.js";
+import { db } from "./data.js";
+
+db.exec(
+	"CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, email TEXT, avatar TEXT)",
+);
 
 const app = express();
 

@@ -6,10 +6,11 @@
 	"author": "Hasan Sabri <hsabri2007@gmail.com>",
 	"license": "MIT",
 	"dependencies": {
-		"express": "^5.2.1"
+		"express": "^5.2.1",
+		"nodemon": "^3.1.14"
 	},
 	"type": "module",
 	"scripts": {
-		"start": "node --env-file=.env server/index.js"
+		"start": "nodemon --env-file=.env server/index.js"
 	}
 }
