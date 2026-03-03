@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Login</title>
+	</head>
+	<body
+		style="
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			min-height: 100vh;
+			font-family: Arial, sans-serif;
+			box-sizing: border-box;
+			margin: 0;
+		"
+	>
+		<h2>Register</h2>
+		<form
+			action="/api/register"
+			method="post"
+			style="display: flex; flex-direction: column; gap: 10px"
+		>
+			<input type="text" name="name" placeholder="Your Name" required />
+			<input type="text" name="handle" placeholder="handle" required />
+			<input
+				type="email"
+				name="email"
+				placeholder="email@example.com"
+				required
+			/>
+			<input
+				name="password"
+				type="password"
+				placeholder="password"
+				required
+			/>
+			<input
+				id="password_confirm"
+				type="password"
+				placeholder="confirm password"
+				required
+			/>
+			<input type="submit" value="register" />
+		</form>
+		<div><a href="/login.html">Login</a> instead</div>
+		<script src="src/register.js"></script>
+	</body>
+</html>
