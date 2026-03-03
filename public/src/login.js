@@ -14,7 +14,8 @@ document.getElementById("submit").addEventListener("click", () => {
 				document.cookie = `handle=${handle}; path=/;`;
 				window.location.replace("/");
 				console.log("Yo");
+			} else {
+				alert(json.error);
 			}
-			// alert(json.message);
 		});
 });

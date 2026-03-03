@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const session = require("express-session");
 
 const db = require("./db.js");
 
@@ -30,6 +31,12 @@ router.post("/register", (req, res) => {
 			"INSERT INTO users (handle, email, name, password) VALUES (?, ?, ?, ?)",
 		)
 		.run(handle, email, name, password);
+	req.session.user = {
+		handle: handle,
+		name: name,
+		email: email,
+		id: query.lastInsertRowid,
+	};
 	res.json({
 		name: name,
 		handle: handle,
@@ -41,12 +48,10 @@ router.post("/register", (req, res) => {
 router.post("/login", (req, res) => {
 	const { handle, password } = req.body;
 	if (!handle || !password) {
-		return res
-			.status(400)
-			.json({
-				error: "Handle and password are required",
-				success: false,
-			});
+		return res.status(400).json({
+			error: "Handle and password are required",
+			success: false,
+		});
 	}
 
 	const query = db.prepare(
@@ -58,6 +63,12 @@ router.post("/login", (req, res) => {
 			.status(401)
 			.json({ error: "Invalid handle or password", success: false });
 	}
+	req.session.user = {
+		handle: user.handle,
+		name: user.name,
+		email: user.email,
+		id: user.id,
+	};
 	res.json({
 		name: user.name,
 		handle: user.handle,
@@ -65,6 +76,48 @@ router.post("/login", (req, res) => {
 		id: user.id,
 		success: true,
 	});
+});
+
+router.get("/feed", (req, res) => {
+	const handle = req.cookies.handle;
+	if (!handle) {
+		return res.status(401).json({ error: "Unauthorized" });
+	}
+	const query = db.prepare("SELECT * FROM posts");
+	const messages = query.all(handle);
+	res.json(messages);
+});
+
+router.post("/profile", (req, res) => {
+	const handle = req.body.handle;
+	if (!handle) {
+		return res.status(401).json({ error: "No handle provided" });
+	}
+	const query = db.prepare("SELECT * FROM users WHERE handle = ?");
+	const user = query.get(handle);
+	const posts = db
+		.prepare("SELECT * FROM posts WHERE user_id = ? LIMIT ? OFFSET ?")
+		.all(user.id, req.body.num, req.body.from);
+	console.log(posts, handle);
+	res.json({ success: true, posts: posts, handle: handle });
+});
+
+router.post("/post", (req, res) => {
+	const { handle, content } = req.body;
+	if (!handle || !content) {
+		return res.status(400).json({
+			error: "Handle and content are required",
+			success: false,
+		});
+	}
+	if (!req.session.user) {
+		return res.status(401).json({ error: "No handle", success: false });
+	}
+	const query = db.prepare(
+		"INSERT INTO posts (user_id, content) VALUES (?, ?)",
+	);
+	query.run(req.session.user.id, content);
+	res.json({ success: true });
 });
 
 module.exports = router;
