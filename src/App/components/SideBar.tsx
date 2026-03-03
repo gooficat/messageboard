@@ -1,3 +1,5 @@
+import { getSessionInfo } from "../session";
+
 function SideNavItem(props: { label: string; href: string }) {
 	return (
 		<a
@@ -18,27 +20,31 @@ function SideNavItem(props: { label: string; href: string }) {
 
 function SideNav() {
 	return (
-		<div className="flex flex-col gap-2 p-4 w-full align-center">
+		<div className="flex flex-col gap-2 p-4 sticky top-0 align-center">
 			<SideNavItem label="Home" href="/" />
-			<SideNavItem label="Search" href="/" />
-			<SideNavItem label="Messages" href="/" />
+			{/*<SideNavItem label="Search" href="/" />*/}
+			{/*<SideNavItem label="Messages" href="/" />*/}
 		</div>
 	);
 }
 
 function SideBar() {
 	return (
-		<div className="flex flex-col flex-1 bg-black justify-between p-4">
+		<div className="flex flex-col max-h-screen sticky top-0 flex-1 bg-black justify-between p-4">
 			<SideNav />
 			<div className="p-4 flex gap-4">
 				<img
-					src="https://placehold.co/48/gray/black?text=P"
+					src={getSessionInfo().user.avatar}
 					alt=""
-					className="rounded-full"
+					className="rounded-full w-12 h-12"
 				/>
-				<div className="block ">
-					<h3 className="text-xl text-gray-300">User Name</h3>
-					<p className="text-gray-600">@username</p>
+				<div className="block">
+					<a href="/profile" className="text-xl text-gray-300">
+						{getSessionInfo().user.name}
+					</a>
+					<p className="text-gray-600">
+						@{getSessionInfo().user.handle}
+					</p>
 				</div>
 			</div>
 		</div>

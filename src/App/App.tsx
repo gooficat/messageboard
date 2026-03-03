@@ -26,6 +26,17 @@ const testPosts = [
 function Content() {
 	return (
 		<div className="block flex-4 min-w-lg max-w-xl bg-black justify-between border-l border-r border-gray-600">
+			<form className="border-b border-gray-600 flex flex-col">
+				<textarea
+					className="border border-gray-600 w-full resize-none text-gray-500 h-40 p-2"
+					placeholder="post content..."
+				/>
+				<div className="flex ">
+					<button className="text-gray-50 bg-emerald-700 py-1 px-2 text-md w-full">
+						post
+					</button>
+				</div>
+			</form>
 			{testPosts.map((post, index) => (
 				<Post post={post} key={index} />
 			))}

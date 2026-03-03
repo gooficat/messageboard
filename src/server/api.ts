@@ -11,4 +11,9 @@ export default {
 			const { username, password } = await req.json();
 		},
 	},
+	"/api/register": {
+		async POST(req: Request) {
+			const { username, password } = await req.json();
+		},
+	},
 };
