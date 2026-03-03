@@ -1,9 +1,14 @@
-import { Router } from "express";
+import { serve } from "bun";
 
-const router = Router();
-
-router.get("/", (_, res) => {
-	res.send("Hello from the API!");
-});
-
-export default router;
+export default {
+	"/api/greet": {
+		async GET(req: Request) {
+			return Response.json({ hello: "world" });
+		},
+	},
+	"/api/login": {
+		async POST(req: Request) {
+			const { username, password } = await req.json();
+		},
+	},
+};

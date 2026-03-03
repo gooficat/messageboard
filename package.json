@@ -1,32 +1,22 @@
 {
-  "name": "messageboard",
+  "name": "bun-react-template",
+  "version": "0.1.0",
   "private": true,
-  "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "nodemon -w src/server -x tsx src/server/main.ts",
-    "start": "cross-env NODE_ENV=production tsx src/server/main.ts",
-    "build": "vite build"
+    "dev": "bun --hot src/index.ts",
+    "start": "NODE_ENV=production bun src/index.ts",
+    "build": "bun run build.ts"
   },
   "dependencies": {
-    "@tailwindcss/vite": "^4.2.1",
-    "cross-env": "^7.0.3",
-    "express": "^5.1.0",
-    "flowbite-react": "^0.12.17",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
-    "tailwindcss": "^4.2.1",
-    "tsx": "^4.19.3",
-    "typescript": "^5.8.3",
-    "vite-express": "*"
+    "bun-plugin-tailwind": "^0.1.2",
+    "react": "^19",
+    "react-dom": "^19",
+    "tailwindcss": "^4.1.11"
   },
   "devDependencies": {
-    "@types/express": "^5.0.1",
-    "@types/node": "^22.15.2",
-    "@types/react": "^19.1.2",
-    "@types/react-dom": "^19.1.2",
-    "@vitejs/plugin-react": "^4.4.1",
-    "nodemon": "^3.1.10",
-    "vite": "^6.3.3"
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@types/bun": "latest"
   }
 }
