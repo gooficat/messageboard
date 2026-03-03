@@ -25,7 +25,7 @@ const testPosts = [
 
 function Content() {
 	return (
-		<div className="block flex-2 min-w-lg max-w-xl bg-black justify-between border-l border-r border-gray-600">
+		<div className="block flex-4 min-w-lg max-w-xl bg-black justify-between border-l border-r border-gray-600">
 			{testPosts.map((post, index) => (
 				<Post post={post} key={index} />
 			))}
@@ -35,7 +35,7 @@ function Content() {
 
 export function App() {
 	return (
-		<div className="flex flex-row w-screen h-screen justify-around">
+		<div className="flex w-full h-full justify-around">
 			<SideBar />
 			<Content />
 			<div className="flex-1 bg-black" /*placeholder*/></div>

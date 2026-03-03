@@ -6,7 +6,7 @@ function Post(props: {
 	};
 }) {
 	return (
-		<div className="border-gray-600 border-t border-b p-2">
+		<div className="border-gray-600 border-b p-2">
 			<div className="p-4 flex gap-2 items-center">
 				<img src="https://placehold.co/48" className="rounded-full" />
 				<div className="">
