@@ -1,12 +1,9 @@
-import { render } from "https://esm.sh/preact";
-import { html } from "./shared.js";
-import { LeftBar } from "./components/left-bar.js";
-import { Feed } from "./components/feed.js";
+if (!document.cookie.split("handle=")[1].split(";")[0]) {
+	window.location.replace("login.html");
+}
 
-render(
-	html`<div id="App" class="flex">
-		<${LeftBar} />
-		<${Feed} />
-	</div>`,
-	document.body,
-);
+const username = document.cookie.split("handle=")[1].split(";")[0];
+console.log(document.cookie);
+document.querySelectorAll(".content-username").forEach((element) => {
+	element.textContent = username;
+});
