@@ -1,0 +1,45 @@
+import Post from "./Post";
+
+const testPosts = [
+	{
+		user: {
+			name: "Goofy Cat",
+			handle: "gooficat",
+		},
+		content:
+			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam rhoncus lorem nec diam consectetur mattis. Etiam pulvinar sem id dapibus ornare. Donec vulputate, justo ac accumsan sagittis, ligula augue ullamcorper purus, eget auctor nunc lectus in turpis. Aliquam nec felis massa. Vestibulum et orci in ante pulvinar fermentum ut bibendum est. Nulla mattis, massa ac luctus fringilla, urna sem rhoncus nisl, a ultrices tellus elit sed libero. Ut hendrerit, arcu eget pharetra dapibus, turpis leo bibendum orci, quis elementum nunc mi quis leo. Integer porta vestibulum nisl, at porttitor mi facilisis malesuada.",
+		date: "24/12/2025",
+	},
+	{
+		user: {
+			name: "Goofier Cat",
+			handle: "goofiercat",
+		},
+		content:
+			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam rhoncus lorem nec diam consectetur mattis. Etiam pulvinar sem id dapibus ornare. Donec vulputate, justo ac accumsan sagittis, ligula augue ullamcorper purus, eget auctor nunc lectus in turpis. Aliquam nec felis massa. Vestibulum et orci in ante pulvinar fermentum ut bibendum est. Nulla mattis, massa ac luctus fringilla, urna sem rhoncus nisl, a ultrices tellus elit sed libero. Ut hendrerit, arcu eget pharetra dapibus, turpis leo bibendum orci, quis elementum nunc mi quis leo. Integer porta vestibulum nisl, at porttitor mi facilisis malesuada.",
+		date: "24/12/2024",
+	},
+];
+
+function Feed() {
+	return (
+		<>
+			<form className="border-b border-gray-600 flex flex-col">
+				<textarea
+					className="border border-gray-600 w-full resize-none text-gray-500 h-40 p-2"
+					placeholder="post content..."
+				/>
+				<div className="flex ">
+					<button className="text-gray-50 bg-emerald-700 py-1 px-2 text-md w-full">
+						post
+					</button>
+				</div>
+			</form>
+			{testPosts.map((post, index) => (
+				<Post post={post} key={index} />
+			))}
+		</>
+	);
+}
+
+export default Feed;

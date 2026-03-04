@@ -1,47 +1,30 @@
 import Login from "./components/Login";
 import Post from "./components/Post";
+import Register from "./components/Register";
 import SideBar from "./components/SideBar";
+import {
+	BrowserRouter as Router,
+	Route,
+	Routes,
+	BrowserRouter,
+	Navigate,
+} from "react-router-dom";
 import "./index.css";
+import Feed from "./components/Feed";
+import { getSessionInfo } from "./session";
 
-const testPosts = [
-	{
-		user: {
-			name: "Goofy Cat",
-			handle: "gooficat",
-		},
-		content:
-			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam rhoncus lorem nec diam consectetur mattis. Etiam pulvinar sem id dapibus ornare. Donec vulputate, justo ac accumsan sagittis, ligula augue ullamcorper purus, eget auctor nunc lectus in turpis. Aliquam nec felis massa. Vestibulum et orci in ante pulvinar fermentum ut bibendum est. Nulla mattis, massa ac luctus fringilla, urna sem rhoncus nisl, a ultrices tellus elit sed libero. Ut hendrerit, arcu eget pharetra dapibus, turpis leo bibendum orci, quis elementum nunc mi quis leo. Integer porta vestibulum nisl, at porttitor mi facilisis malesuada.",
-		date: "24/12/2025",
-	},
-	{
-		user: {
-			name: "Goofier Cat",
-			handle: "goofiercat",
-		},
-		content:
-			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam rhoncus lorem nec diam consectetur mattis. Etiam pulvinar sem id dapibus ornare. Donec vulputate, justo ac accumsan sagittis, ligula augue ullamcorper purus, eget auctor nunc lectus in turpis. Aliquam nec felis massa. Vestibulum et orci in ante pulvinar fermentum ut bibendum est. Nulla mattis, massa ac luctus fringilla, urna sem rhoncus nisl, a ultrices tellus elit sed libero. Ut hendrerit, arcu eget pharetra dapibus, turpis leo bibendum orci, quis elementum nunc mi quis leo. Integer porta vestibulum nisl, at porttitor mi facilisis malesuada.",
-		date: "24/12/2024",
-	},
-];
-
-function Content() {
+function RootRedirect() {
 	return (
-		<div className="block flex-4 min-w-lg max-w-xl justify-between border-l border-r border-gray-600">
-			<form className="border-b border-gray-600 flex flex-col">
-				<textarea
-					className="border border-gray-600 w-full resize-none text-gray-500 h-40 p-2"
-					placeholder="post content..."
-				/>
-				<div className="flex ">
-					<button className="text-gray-50 bg-emerald-700 py-1 px-2 text-md w-full">
-						post
-					</button>
-				</div>
-			</form>
-			{testPosts.map((post, index) => (
-				<Post post={post} key={index} />
-			))}
-		</div>
+		<Route
+			path="/"
+			element={
+				getSessionInfo().user.avatar !== "" ? (
+					<Navigate to="/feed" />
+				) : (
+					<Navigate to="/login" />
+				)
+			}
+		/>
 	);
 }
 
@@ -49,10 +32,17 @@ export function App() {
 	return (
 		<div className="flex w-full min-h-screen justify-around bg-black">
 			<SideBar />
-			<Content />
+			<div className="block flex-4 min-w-lg max-w-xl justify-between border-l border-r border-gray-600">
+				<BrowserRouter>
+					<Routes>
+						<RootRedirect />
+						<Route path="/feed" element={<Feed />} />
+						<Route path="/login" element={<Login />} />
+						<Route path="/register" element={<Register />} />
+					</Routes>
+				</BrowserRouter>
+			</div>
 			<div className="flex-1" />
-			{/*placeholder*/}
-			{/*<Login />*/}
 		</div>
 	);
 }

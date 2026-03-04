@@ -15,16 +15,29 @@ db.run(`CREATE TABLE IF NOT EXISTS posts (
     FOREIGN KEY (user_id) REFERENCES users(id)
 )`);
 
+type User = {
+	id: number;
+	username: string;
+	password: string;
+};
+
+type Post = {
+	id: number;
+	user_id: number;
+	content: string;
+	created_at: string;
+};
+
 export function getUserById(id: number) {
 	const user = db.prepare(`SELECT * FROM users WHERE id = ?`).get(id);
-	return user;
+	return user as User | undefined;
 }
 
 export function getUserByUsername(username: string) {
 	const user = db
 		.prepare(`SELECT * FROM users WHERE username = ?`)
 		.get(username);
-	return user;
+	return user as User | undefined;
 }
 
 export function createUser(username: string, password: string) {
@@ -38,14 +51,14 @@ export function login(username: string, password: string) {
 	const user = db
 		.prepare(`SELECT * FROM users WHERE username = ? AND password = ?`)
 		.get(username, password);
-	return user;
+	return user as User | undefined;
 }
 
 export function getPosts(begin: number, count: number) {
 	const posts = db
 		.prepare(`SELECT * FROM posts WHERE id > ? ORDER BY id ASC LIMIT ?`)
 		.all(begin, count);
-	return posts;
+	return posts as Post[];
 }
 
 export function getPostsFromUser(begin: number, count: number, userId: number) {
@@ -54,7 +67,7 @@ export function getPostsFromUser(begin: number, count: number, userId: number) {
 			`SELECT * FROM posts WHERE user_id = ? AND id > ? ORDER BY id ASC LIMIT ?`,
 		)
 		.all(userId, begin, count);
-	return posts;
+	return posts as Post[];
 }
 
 export function createPost(userId: number, content: string) {
