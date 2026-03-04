@@ -1,4 +1,9 @@
-import { createUser, getPosts, getUserByUsername } from "./db";
+import {
+	createUser,
+	getPosts,
+	getPostsFromUser,
+	getUserByUsername,
+} from "./db";
 
 export default {
 	"/api/greet": {
@@ -52,8 +57,8 @@ export default {
 	},
 	"/api/posts/fetch": {
 		async GET(req: Request) {
-			const { begin, count } = await req.json();
-			const posts = getPosts(begin, count);
+			const { begin, count, userHandle } = await req.json();
+			const posts = getPostsFromUser(begin, count, userHandle);
 			return Response.json({ posts });
 		},
 	},

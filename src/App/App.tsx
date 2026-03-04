@@ -1,3 +1,4 @@
+import Login from "./components/Login";
 import Post from "./components/Post";
 import SideBar from "./components/SideBar";
 import "./index.css";
@@ -25,7 +26,7 @@ const testPosts = [
 
 function Content() {
 	return (
-		<div className="block flex-4 min-w-lg max-w-xl bg-black justify-between border-l border-r border-gray-600">
+		<div className="block flex-4 min-w-lg max-w-xl justify-between border-l border-r border-gray-600">
 			<form className="border-b border-gray-600 flex flex-col">
 				<textarea
 					className="border border-gray-600 w-full resize-none text-gray-500 h-40 p-2"
@@ -46,10 +47,12 @@ function Content() {
 
 export function App() {
 	return (
-		<div className="flex w-full h-full justify-around">
+		<div className="flex w-full min-h-screen justify-around bg-black">
 			<SideBar />
 			<Content />
-			<div className="flex-1 bg-black" /*placeholder*/></div>
+			<div className="flex-1" />
+			{/*placeholder*/}
+			{/*<Login />*/}
 		</div>
 	);
 }

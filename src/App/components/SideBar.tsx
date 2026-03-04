@@ -30,7 +30,7 @@ function SideNav() {
 
 function SideBar() {
 	return (
-		<div className="flex flex-col max-h-screen sticky top-0 flex-1 bg-black justify-between p-4">
+		<div className="flex flex-col max-h-screen sticky top-0 flex-1 justify-between p-4">
 			<SideNav />
 			<div className="p-4 flex gap-4">
 				<img

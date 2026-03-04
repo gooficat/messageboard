@@ -1,13 +1,13 @@
-import sqlite from "node:sqlite";
+import { Database } from "bun:sqlite";
 
-export const db = new sqlite.DatabaseSync("db.sqlite");
+export const db = new Database("db.sqlite");
 
-db.exec(`CREATE TABLE IF NOT EXISTS users (
+db.run(`CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     username TEXT NOT NULL UNIQUE,
     password TEXT NOT NULL
 )`);
-db.exec(`CREATE TABLE IF NOT EXISTS posts (
+db.run(`CREATE TABLE IF NOT EXISTS posts (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id INTEGER NOT NULL,
     content TEXT NOT NULL,
@@ -45,6 +45,15 @@ export function getPosts(begin: number, count: number) {
 	const posts = db
 		.prepare(`SELECT * FROM posts WHERE id > ? ORDER BY id ASC LIMIT ?`)
 		.all(begin, count);
+	return posts;
+}
+
+export function getPostsFromUser(begin: number, count: number, userId: number) {
+	const posts = db
+		.prepare(
+			`SELECT * FROM posts WHERE user_id = ? AND id > ? ORDER BY id ASC LIMIT ?`,
+		)
+		.all(userId, begin, count);
 	return posts;
 }
 
