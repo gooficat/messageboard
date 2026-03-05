@@ -1,10 +1,8 @@
 import http from "http";
-import utils from "./utils.js";
-import path from "path";
+import route from "./route.js";
+import db from "./db.js";
 
-const server = http.createServer((req, res) => {
-	utils.sendFile(path.join(utils.clientPath, "index.html"), res);
-});
+const server = http.createServer((req, res) => route.route(req, res));
 
 server.listen(process.env.PORT, () => {
 	console.log(`Server listening on port ${process.env.PORT}`);
