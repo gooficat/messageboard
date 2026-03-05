@@ -4,6 +4,6 @@
 	"type": "module",
 	"private": true,
 	"scripts": {
-		"start": "bun --env-file=.env src/server/index.js"
+		"start": "bun --watch --env-file=.env src/server/index.js"
 	}
 }
