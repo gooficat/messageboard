@@ -9,7 +9,7 @@ export function App() {
 	return (
 		<BrowserRouter>
 			<Routes>
-				<Route path="/feed" element={<></>} />
+				<Route path="/feed" element={<>Feed</>} />
 				<Route path="/login" element={<Login />} />
 				<Route path="/register" element={<Register />} />
 				<Route path="/profile" element={<></>} />

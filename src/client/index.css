@@ -35,3 +35,16 @@
 .pal-bg-white {
 	background-color: var(--pal-white);
 }
+
+.pal-border-black {
+	border: var(--pal-black);
+}
+.pal-border-grey {
+	border: var(--pal-grey);
+}
+.pal-border-highlight {
+	border: var(--pal-highlight);
+}
+.pal-border-white {
+	border: var(--pal-white);
+}
