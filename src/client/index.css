@@ -1,0 +1,37 @@
+@import "tailwindcss";
+
+:root {
+	--pal-black: #222831;
+	--pal-grey: #393e46;
+	--pal-highlight: #ffd369;
+	--pal-white: #eeeeee;
+
+	background-color: var(--pal-black);
+	color: var(--pal-white);
+}
+
+.pal-text-black {
+	color: var(--pal-black);
+}
+.pal-text-white {
+	color: var(--pal-white);
+}
+.pal-bg-highlight {
+	background-color: var(--pal-highlight);
+}
+.pal-bg-white {
+	background-color: var(--pal-white);
+}
+
+.pal-bg-black {
+	background-color: var(--pal-black);
+}
+.pal-bg-grey {
+	background-color: var(--pal-grey);
+}
+.pal-bg-highlight {
+	background-color: var(--pal-highlight);
+}
+.pal-bg-white {
+	background-color: var(--pal-white);
+}
