@@ -2,7 +2,9 @@
 
 run:
 > bun start
+
 dev server:
 > bun dev
+
 build:
 > bun build
