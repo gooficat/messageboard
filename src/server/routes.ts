@@ -1,4 +1,4 @@
-import { startSession } from "./controllers/session";
+import { deleteSession, startSession } from "./controllers/session";
 import index from "../client/index.html";
 import {
 	createUser,
@@ -43,7 +43,10 @@ export default {
 			});
 		}
 	},
-	"/api/logout": async (req: Bun.BunRequest) => {
-		const { sessionId } = await req.json();
+	"/api/logout/:sessionId": async (req: Bun.BunRequest) => {
+		const { sessionId } = req.params;
+		if (sessionId) {
+			deleteSession(sessionId);
+		}
 	}
 };
