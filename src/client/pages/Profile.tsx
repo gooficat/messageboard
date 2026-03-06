@@ -43,14 +43,14 @@ function Profile() {
 		if (!user) {
 			window.location.href = "/login";
 		} else {
-			console.log(user);
+			// console.log(user);
 			getPosts(user as string, 0, 10).then((posts) => {
 				// setPosts();
 
 				posts.forEach((post) => {
-					console.log(
-						`${post.user_id}, ${post.content}, ${post.created_at}`,
-					);
+					// console.log(
+					// 	`${post.user_id}, ${post.content}, ${post.created_at}`,
+					// );
 				});
 			});
 		}

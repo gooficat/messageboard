@@ -62,12 +62,12 @@ export default {
 	},
 	"/api/profile": {
 		GET: async (req: Bun.BunRequest) => {
-			console.log(req.url);
+			// console.log(req.url);
 			const url = new URL(req.url).searchParams;
 			const user = url.get("user");
 			const start = parseInt(url.get("start") ?? "0");
 			const count = parseInt(url.get("count") ?? "0");
-			console.log(`${user}, ${start}, ${count}`);
+			// console.log(`${user}, ${start}, ${count}`);
 
 			if (!user) {
 				return Response.json({
@@ -91,7 +91,7 @@ export default {
 			const { sessionId, content } = await req.json();
 			const session = await getSession(sessionId);
 			if (!session) {
-				console.error("Invalid session");
+				// console.error("Invalid session");
 				return Response.json({
 					success: false,
 					invalidSession: true,

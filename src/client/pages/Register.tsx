@@ -20,10 +20,14 @@ function Register() {
 			body: JSON.stringify(credentials),
 		}).then((response) => {
 			response.json().then((json) => {
-				console.log(json);
+				// console.log(json);
 				if (json.success) {
-					cookieStore.set({ name: "sessionId", value: json.sessionId, path: "/" });
-					console.log(document.cookie);
+					cookieStore.set({
+						name: "sessionId",
+						value: json.sessionId,
+						path: "/",
+					});
+					// console.log(document.cookie);
 					window.location.href = "/";
 				} else {
 					setError(json.message);
@@ -40,7 +44,9 @@ function Register() {
 				<FormEntry name="email" type="email" />
 				<FormEntry name="password" type="password" />
 				<FormSubmit text="Register" />
-				<a className="text-center underline" href="/login">Login</a>
+				<a className="text-center underline" href="/login">
+					Login
+				</a>
 			</Form>
 		</div>
 	);

@@ -31,7 +31,7 @@ function CreatePost() {
 			}).then((res) => {
 				res.json().then((data) => {
 					if (data.invalidSession) {
-						console.log(document.cookie);
+						// console.log(document.cookie);
 						window.location.href = "/login";
 						return;
 					}
@@ -39,7 +39,7 @@ function CreatePost() {
 						window.location.href = "/";
 					} else {
 						setError(data.message);
-						console.error(`msg: ${data.message}`);
+						// console.error(`msg: ${data.message}`);
 					}
 				});
 			});

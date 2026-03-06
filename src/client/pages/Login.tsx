@@ -20,11 +20,19 @@ function Login() {
 		}).then((response) => {
 			response.json().then((json) => {
 				if (json.success) {
-					console.log(json.sessionId);
-					cookieStore.set({ name: "sessionId", value: json.sessionId, path: "/" }).then(() => {
-						cookieStore.get("sessionId").then((id) => console.log(id))
-						window.location.href = "/";
-					});
+					// console.log(json.sessionId);
+					cookieStore
+						.set({
+							name: "sessionId",
+							value: json.sessionId,
+							path: "/",
+						})
+						.then(() => {
+							cookieStore
+								.get("sessionId")
+								.then((id) => console.log(id));
+							window.location.href = "/";
+						});
 				} else {
 					setError(json.message);
 				}
@@ -39,7 +47,9 @@ function Login() {
 				<FormEntry name="username" />
 				<FormEntry name="password" type="password" />
 				<FormSubmit text="Login" />
-				<a className="text-center underline" href="/register">Register</a>
+				<a className="text-center underline" href="/register">
+					Register
+				</a>
 			</Form>
 		</div>
 	);

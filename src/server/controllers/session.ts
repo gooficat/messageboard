@@ -23,7 +23,7 @@ const deleteSession = async (uuid: string) => {
 };
 
 const getSession = async (uuid: string) => {
-	console.log(`sessions: ${sessions.size}, ${sessions}`);
+	// console.log(`sessions: ${sessions.size}, ${sessions}`);
 	return sessions.get(uuid);
 };
 
