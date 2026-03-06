@@ -9,13 +9,19 @@ function Post({ post }: { post: PostType }) {
 		.then((data) => setUserName(data.user.username));
 
 	return (
-		<div>
-			<hr />
-			<a href={`/profile?user=${userName}`}>@{userName}</a>
+		<div className="pal-bg-grey p-6 rounded-lg mb-4 flex flex-col gap-2 h-lg">
+			<a
+				className="font-bold pal-text-highlight"
+				href={`/profile?user=${userName}`}
+			>
+				@{userName}
+			</a>
+			{/*<hr />*/}
 			<h3>{post.content}</h3>
-			<hr />
-			<h3>{post.created_at}</h3>
-			<hr />
+			{/*<hr />*/}
+			<p className="text-xs text-right pal-text-black">
+				{post.created_at}
+			</p>
 		</div>
 	);
 }

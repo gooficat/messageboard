@@ -3,7 +3,7 @@ import { Post } from "../components/Post";
 import { type PostType } from "../../shared/post";
 
 function Feed() {
-	const [posts, setPosts] = useState<PostType[]>([]);
+	const [posts, setPosts] = useState<React.ReactNode[]>([]);
 
 	const url = new URL("/api/feed", window.location.origin);
 
@@ -26,13 +26,11 @@ function Feed() {
 	}, [pageNumber, perPage]);
 
 	return (
-		<>
-			<h1>Feed</h1>
+		<div className="flex flex-col items-center justify-center h-screen w-screen p-4 gap-4 max-w-md mx-auto">
 			<a href="/create">Create Post</a>
-			<br />
 			<a href="/logout">Log out</a>
-			{posts}
-		</>
+			<div className="block">{posts}</div>
+		</div>
 	);
 }
 

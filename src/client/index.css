@@ -11,19 +11,12 @@
 	color: var(--pal-white);
 }
 
-.pal-text-black {
-	color: var(--pal-black);
-}
-.pal-text-white {
-	color: var(--pal-white);
-}
 .pal-bg-highlight {
 	background-color: var(--pal-highlight);
 }
 .pal-bg-white {
 	background-color: var(--pal-white);
 }
-
 .pal-bg-black {
 	background-color: var(--pal-black);
 }
@@ -48,6 +41,19 @@
 }
 .pal-border-white {
 	border: var(--pal-white);
+}
+
+.pal-text-black {
+	color: var(--pal-black);
+}
+.pal-text-grey {
+	color: var(--pal-grey);
+}
+.pal-text-white {
+	color: var(--pal-white);
+}
+.pal-text-highlight {
+	color: var(--pal-highlight);
 }
 .pal-text-err {
 	color: var(--pal-err);
