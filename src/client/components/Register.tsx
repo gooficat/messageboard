@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Form, FormEntry, FormSubmit } from "./Forms";
 
 function Register() {
 	const [error, setError] = useState("");
@@ -31,34 +32,14 @@ function Register() {
 
 	return (
 		<div className="w-full h-screen flex items-center justify-center">
-			<form
-				onSubmit={OnRegisterSubmit}
-				className="flex-col flex max-w-sm gap-4"
-			>
+			<Form onSubmit={OnRegisterSubmit}>
 				{<p className="pal-text-err">{error}</p>}
-				<input
-					className="pal-bg-grey p-2 rounded-sm"
-					type="text"
-					name="username"
-				/>
-				<input
-					className="pal-bg-grey p-2 rounded-sm"
-					type="text"
-					name="email"
-				/>
-				<input
-					className="pal-bg-grey p-2 rounded-sm"
-					type="password"
-					name="password"
-				/>
-				<button
-					className="pal-bg-highlight rounded-sm p-2"
-					type="submit"
-				>
-					Register
-				</button>
+				<FormEntry name="username" />
+				<FormEntry name="email" type="email" />
+				<FormEntry name="password" type="password" />
+				<FormSubmit text="Register" />
 				<a className="text-center underline" href="/register">Register</a>
-			</form>
+			</Form>
 		</div>
 	);
 }
