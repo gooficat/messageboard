@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Post } from "../components/Post";
 import { type PostType } from "../../shared/post";
 
@@ -10,15 +10,21 @@ function Feed() {
 	let pageNumber = url.searchParams.get("page") ?? "0";
 	const perPage = url.searchParams.get("perPage") ?? "10";
 
-	fetch(`/api/feed?start=${pageNumber}&count=${perPage}`)
-		.then((response) => response.json())
-		.then((data) => {
-			setPosts(
-				data.posts.map((post: PostType) => {
-					return <Post key={post.id} post={post} />;
-				}),
-			);
-		});
+	useEffect(() => {
+		fetch(`/api/feed?start=${pageNumber}&count=${perPage}`)
+			.then((response) => response.json())
+			.then((data) => {
+				if (!data.success) {
+					return;
+				}
+				setPosts(
+					data.posts.map((post: PostType) => {
+						return <Post key={post.id} post={post} />;
+					}),
+				);
+			});
+	}, [pageNumber, perPage]);
+
 	return (
 		<>
 			<h1>Feed</h1>

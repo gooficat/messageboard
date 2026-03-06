@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Form, FormEntry, FormSubmit } from "../components/Forms";
+import { Form, FormEntry, FormSubmit, storeUser } from "../components/Forms";
+
 
 function Register() {
 	const [error, setError] = useState("");
@@ -22,11 +23,7 @@ function Register() {
 			response.json().then((json) => {
 				// console.log(json);
 				if (json.success) {
-					cookieStore.set({
-						name: "sessionId",
-						value: json.sessionId,
-						path: "/",
-					});
+					storeUser(json);
 					// console.log(document.cookie);
 					window.location.href = "/";
 				} else {

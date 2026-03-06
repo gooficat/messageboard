@@ -10,6 +10,14 @@
             "name": "Run bun",
             "runtimeExecutable": "bun",
             "cwd": "${workspaceFolder}",
+            "args": ["dev"]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Run bun",
+            "runtimeExecutable": "bun",
+            "cwd": "${workspaceFolder}",
             "args": [
                 "dev"
             ]

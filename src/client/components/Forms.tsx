@@ -1,11 +1,27 @@
 import React from "react";
 
-type FormEntryProps = {
-    type?: string,
-    name: string
+function storeUser(json: { sessionId: string, user: { username: string, id: number; }; })
+{
+    cookieStore.set({
+        name: "sessionId",
+        value: json.sessionId,
+        path: "/",
+    });
+    cookieStore.set({
+        name: "userId", value: json.user.id.toString(), path: "/"
+    });
+    cookieStore.set({
+        name: "userName", value: json.user.username, path: "/"
+    });
 }
 
-function FormEntry(props: FormEntryProps) {
+type FormEntryProps = {
+    type?: string,
+    name: string;
+};
+
+function FormEntry(props: FormEntryProps)
+{
     return (
         <input
             className="pal-bg-grey p-2 rounded-sm"
@@ -22,10 +38,11 @@ type FormProps = {
 };
 
 type FormSubmitProps = {
-    text: string
-}
+    text: string;
+};
 
-function FormSubmit(props: FormSubmitProps) {
+function FormSubmit(props: FormSubmitProps)
+{
     return (
         <button
             className="pal-bg-highlight rounded-sm p-2"
@@ -36,7 +53,8 @@ function FormSubmit(props: FormSubmitProps) {
     );
 }
 
-function Form(props: FormProps) {
+function Form(props: FormProps)
+{
     return (
         <form onSubmit={props.onSubmit} className="flex-col flex max-w-sm gap-4">
             {props.children}
@@ -44,4 +62,4 @@ function Form(props: FormProps) {
     );
 }
 
-export { FormEntry, Form, FormSubmit }
+export { FormEntry, Form, FormSubmit, storeUser };

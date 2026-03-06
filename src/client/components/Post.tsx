@@ -11,7 +11,7 @@ function Post({ post }: { post: PostType }) {
 	return (
 		<div>
 			<hr />
-			<h3>@{userName}</h3>
+			<a href={`/profile?user=${userName}`}>@{userName}</a>
 			<h3>{post.content}</h3>
 			<hr />
 			<h3>{post.created_at}</h3>

@@ -1,43 +1,30 @@
 import { useState } from "react";
-import { Form, FormEntry, FormSubmit } from "../components/Forms";
+import { Form, FormEntry, FormSubmit, storeUser } from "../components/Forms";
 
 function Login() {
 	const [error, setError] = useState("");
 
-	function OnLoginSubmit(event: React.SubmitEvent<HTMLFormElement>) {
+	async function OnLoginSubmit(event: React.SubmitEvent<HTMLFormElement>) {
 		event.preventDefault();
 		const data = new FormData(event.target as HTMLFormElement);
 		const credentials = {
 			username: data.get("username"),
 			password: data.get("password"),
 		};
-		fetch("/api/login", {
+		const response = await fetch("/api/login", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
 			},
 			body: JSON.stringify(credentials),
-		}).then((response) => {
-			response.json().then((json) => {
-				if (json.success) {
-					// console.log(json.sessionId);
-					cookieStore
-						.set({
-							name: "sessionId",
-							value: json.sessionId,
-							path: "/",
-						})
-						.then(() => {
-							cookieStore
-								.get("sessionId")
-								.then((id) => console.log(id));
-							window.location.href = "/";
-						});
-				} else {
-					setError(json.message);
-				}
-			});
 		});
+		const json = await response.json();
+		if (json.success) {
+			storeUser(json);
+			window.location.replace("/");
+		} else {
+			setError(json.message);
+		}
 	}
 
 	return (

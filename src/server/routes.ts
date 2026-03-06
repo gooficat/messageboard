@@ -2,9 +2,12 @@ import { deleteSession, getSession, startSession } from "./controllers/session";
 import index from "../client/index.html";
 import {
 	createUser,
+	followUser,
 	getUserByEmail,
 	getUserById,
 	getUserByUsername,
+	isFollowing,
+	unfollowUser,
 } from "./controllers/user";
 import {
 	createPost,
@@ -34,6 +37,7 @@ export default {
 		}
 		return Response.json({
 			success: true,
+			user: user,
 			sessionId: await startSession(username),
 		});
 	},
@@ -61,6 +65,7 @@ export default {
 			await createUser(username, email, password);
 			return Response.json({
 				success: true,
+				user: await getUserByUsername(username),
 				sessionId: await startSession(username),
 			});
 		}
@@ -95,11 +100,19 @@ export default {
 		},
 	},
 	"/api/user": async (req: Bun.BunRequest) => {
-		const id = new URL(req.url).searchParams.get("id");
+		const params = new URL(req.url).searchParams;
+		const id = params.get("id");
 		if (id) {
 			return Response.json({
 				success: true,
 				user: await getUserById(parseInt(id)),
+			});
+		}
+		const name = params.get("name");
+		if (name) {
+			return Response.json({
+				success: true,
+				user: await getUserByUsername(name),
 			});
 		}
 		return Response.json({
@@ -151,4 +164,83 @@ export default {
 			});
 		},
 	},
+	"/api/follow": async (req: Bun.BunRequest) => {
+		const { sessionId, myId, userId } = Object.fromEntries(
+			new URL(req.url).searchParams.entries(),
+		);
+		// console.log(sessionId, myId, userId);
+		const session = await getSession(sessionId!);
+		if (!session) {
+			return Response.json({
+				success: false,
+				invalidSession: true,
+			});
+		}
+		if (
+			(await getUserByUsername(session.username)).id !== parseInt(myId!)
+		) {
+			return Response.json({
+				success: false,
+				invalidSession: true,
+			});
+		}
+		await followUser(parseInt(myId!), parseInt(userId!));
+		return Response.json({
+			success: true,
+		});
+	},
+	"/api/unfollow": async (req: Bun.BunRequest) => {
+		const { sessionId, myId, userId } = Object.fromEntries(
+			new URL(req.url).searchParams.entries(),
+		);
+		if (!sessionId || !myId || !userId) {
+			return Response.json({
+				success: false,
+				message: "all fields are required",
+			});
+		}
+		const session = await getSession(sessionId!);
+		if (!session) {
+			return Response.json({
+				success: false,
+				invalidSession: true,
+			});
+		}
+		if (
+			session.username !== (await getUserById(parseInt(myId!))).username
+		) {
+			return Response.json({
+				success: false,
+				message: "Unauthorized",
+			});
+		}
+		await unfollowUser(parseInt(myId!), parseInt(userId!));
+		return Response.json({
+			success: true,
+		});
+	},
+	"/api/following": async (req: Bun.BunRequest) => {
+		const { myId, userId } = Object.fromEntries(
+			new URL(req.url).searchParams.entries(),
+		);
+		if (!myId || !userId) {
+			return Response.json({
+				success: false,
+				message: "all fields are required",
+			});
+		}
+		const user = await getUserById(parseInt(userId!));
+		if (!user) {
+			return Response.json({
+				success: false,
+				message: "User not found",
+			});
+		}
+		const following = await isFollowing(parseInt(myId!), parseInt(userId!));
+		return Response.json({
+			success: true,
+			followed: following,
+		});
+	},
+	// "/api/"
 };

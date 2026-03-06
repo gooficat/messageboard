@@ -35,4 +35,34 @@ const getUserById = async (id: number) => {
 	return result[0];
 };
 
-export { createUser, getUserByUsername, getUserByEmail, getUserById };
+const followUser = async (followerId: number, followingId: number) => {
+	await db`
+    INSERT INTO follows (follower_id, following_id)
+    VALUES (${followerId}, ${followingId})
+  `;
+};
+
+const unfollowUser = async (followerId: number, followingId: number) => {
+	await db`
+    DELETE FROM follows
+    WHERE follower_id = ${followerId} AND following_id = ${followingId}
+  `;
+};
+
+const isFollowing = async (followerId: number, followingId: number) => {
+	const result = await db`
+    SELECT * FROM follows
+    WHERE follower_id = ${followerId} AND following_id = ${followingId}
+  `;
+	return result.length > 0;
+};
+
+export {
+	createUser,
+	getUserByUsername,
+	getUserByEmail,
+	getUserById,
+	followUser,
+	unfollowUser,
+	isFollowing,
+};

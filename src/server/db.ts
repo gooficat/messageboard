@@ -12,6 +12,17 @@ await db`
 `;
 
 await db`
+	CREATE TABLE IF NOT EXISTS follows (
+		id INTEGER PRIMARY KEY AUTOINCREMENT,
+		following_id INTEGER NOT NULL,
+		follower_id INTEGER NOT NULL,
+		FOREIGN KEY (following_id) REFERENCES users(id),
+		FOREIGN KEY (follower_id) REFERENCES users(id),
+		UNIQUE (following_id, follower_id)
+	)
+`;
+
+await db`
 	CREATE TABLE IF NOT EXISTS posts (
 		id INTEGER PRIMARY KEY AUTOINCREMENT,
 		user_id INTEGER NOT NULL,
