@@ -27,4 +27,12 @@ const getUserByEmail = async (email: string) => {
 	return result[0];
 };
 
-export { createUser, getUserByUsername, getUserByEmail };
+const getUserById = async (id: number) => {
+	const result = await db`
+    SELECT * FROM users
+    WHERE id = ${id}
+  `;
+	return result[0];
+};
+
+export { createUser, getUserByUsername, getUserByEmail, getUserById };

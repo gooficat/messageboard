@@ -3,14 +3,25 @@ import index from "../client/index.html";
 import {
 	createUser,
 	getUserByEmail,
+	getUserById,
 	getUserByUsername,
 } from "./controllers/user";
-import { createPost, getPostsByUserId } from "./controllers/post";
+import {
+	createPost,
+	getPostsByRecency,
+	getPostsByUserId,
+} from "./controllers/post";
 
 export default {
 	"/*": index,
-	"/api/feed": (req: Bun.BunRequest) => {
-		return new Response("Feed coming soon???...");
+	"/api/feed": async (req: Bun.BunRequest) => {
+		const url = new URL(req.url);
+		const start = parseInt(url.searchParams.get("start") ?? "0");
+		const count = parseInt(url.searchParams.get("count") ?? "10");
+		return Response.json({
+			success: true,
+			posts: await getPostsByRecency(start, count),
+		});
 	},
 	"/api/login": async (req: Bun.BunRequest) => {
 		const { username, password } = await req.json();
@@ -64,27 +75,37 @@ export default {
 		GET: async (req: Bun.BunRequest) => {
 			// console.log(req.url);
 			const url = new URL(req.url).searchParams;
-			const user = url.get("user");
+			const username = url.get("user");
 			const start = parseInt(url.get("start") ?? "0");
 			const count = parseInt(url.get("count") ?? "0");
 			// console.log(`${user}, ${start}, ${count}`);
 
-			if (!user) {
+			if (!username) {
 				return Response.json({
 					success: false,
 					message: "User field is required",
 				});
 			} else {
+				const user = await getUserByUsername(username);
 				return Response.json({
 					success: true,
-					posts: await getPostsByUserId(
-						(await getUserByUsername(user)).username,
-						start,
-						count,
-					),
+					posts: await getPostsByUserId(user.id, start, count),
 				});
 			}
 		},
+	},
+	"/api/user": async (req: Bun.BunRequest) => {
+		const id = new URL(req.url).searchParams.get("id");
+		if (id) {
+			return Response.json({
+				success: true,
+				user: await getUserById(parseInt(id)),
+			});
+		}
+		return Response.json({
+			success: false,
+			message: "field is required",
+		});
 	},
 	"/api/post": {
 		POST: async (req: Bun.BunRequest) => {
@@ -123,7 +144,7 @@ export default {
 					message: "Post cannot be empty",
 				});
 			}
-			await createPost(user.username, content);
+			await createPost(content, user.id);
 			session.lastPost = date;
 			return Response.json({
 				success: true,

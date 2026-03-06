@@ -1,3 +1,4 @@
+import type { PostType } from "@/shared/post";
 import db from "../db";
 
 const createPost = async (content: string, userId: number) => {
@@ -11,7 +12,7 @@ const getPostsByUserId = async (
 	userId: number,
 	start: number,
 	count: number,
-) => {
+): Promise<PostType[]> => {
 	const result = await db`
 		SELECT * FROM posts
 		WHERE user_id = ${userId}
@@ -21,7 +22,10 @@ const getPostsByUserId = async (
 	return result;
 };
 
-const getPostsByRecency = async (start: number, count: number) => {
+const getPostsByRecency = async (
+	start: number,
+	count: number,
+): Promise<PostType[]> => {
 	const result = await db`
 		SELECT * FROM posts
 		ORDER BY created_at DESC

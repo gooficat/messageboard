@@ -1,10 +1,6 @@
-import { useState } from "react";
-
-type PostType = {
-	user_id: number;
-	content: string;
-	created_at: string;
-};
+import { useEffect, useState } from "react";
+import { type PostType } from "@/shared/post";
+import { Post } from "../components/Post";
 
 async function getPosts(
 	user: string,
@@ -36,30 +32,28 @@ async function getUserParam(params: URLSearchParams) {
 }
 
 function Profile() {
-	const [posts, setPosts] = useState();
-	const params = new URLSearchParams(window.location.href.split("?")[1]);
+	const [posts, setPosts] = useState<PostType[]>([]);
 
-	getUserParam(params).then((user) => {
-		if (!user) {
-			window.location.href = "/login";
-		} else {
-			// console.log(user);
-			getPosts(user as string, 0, 10).then((posts) => {
-				// setPosts();
-
-				posts.forEach((post) => {
-					// console.log(
-					// 	`${post.user_id}, ${post.content}, ${post.created_at}`,
-					// );
-				});
-			});
-		}
-	});
+	useEffect(() => {
+		const params = new URLSearchParams(window.location.href.split("?")[1]);
+		getUserParam(params).then((user) => {
+			if (!user) {
+				window.location.href = "/login";
+			} else {
+				console.log(user);
+				getPosts(user as string, 0, 10).then(setPosts);
+			}
+		});
+	}, []);
 
 	return (
 		<>
 			<h1>Profile</h1>
-			<ul>{posts}</ul>
+			<ul>
+				{posts.map((post) => (
+					<Post key={post.id} post={post} />
+				))}
+			</ul>
 		</>
 	);
 }
