@@ -7,17 +7,17 @@ import Register from "./pages/Register";
 import Profile from "./pages/Profile";
 import Feed from "./pages/Feed";
 import Logout from "./pages/Logout";
+import CreatePost from "./pages/CreatePost";
 
 function NavFromRoot() {
 	cookieStore.get("sessionId").then((cookie) => {
 		if (cookie !== null) {
 			window.location.href = "/feed";
-		}
-		else {
+		} else {
 			window.location.href = "/login";
 		}
 	});
-	return <></>
+	return <></>;
 }
 
 export function App() {
@@ -28,7 +28,8 @@ export function App() {
 				<Route path="/feed" element={<Feed />} />
 				<Route path="/login" element={<Login />} />
 				<Route path="/register" element={<Register />} />
-				<Route path="/profile" element={<Profile />} />
+				<Route path="/profile/*" element={<Profile />} />
+				<Route path="/create" element={<CreatePost />} />
 				<Route path="/logout" element={<Logout />} />
 			</Routes>
 		</BrowserRouter>

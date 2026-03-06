@@ -1,16 +1,22 @@
 import db from "../db";
 
-const createPost = async (title: string, content: string, userId: number) => {
+const createPost = async (content: string, userId: number) => {
 	await db`
-		INSERT INTO posts (title, content, user_id)
-		VALUES (${title}, ${content}, ${userId})
+		INSERT INTO posts (content, user_id)
+		VALUES (${content}, ${userId})
 	`;
 };
 
-const getPostsByUserId = async (userId: number) => {
+const getPostsByUserId = async (
+	userId: number,
+	start: number,
+	count: number,
+) => {
 	const result = await db`
 		SELECT * FROM posts
 		WHERE user_id = ${userId}
+		LIMIT ${count}
+		OFFSET ${start}
 	`;
 	return result;
 };
