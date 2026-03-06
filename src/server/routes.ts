@@ -1,3 +1,4 @@
+import { startSession } from "./controllers/session";
 import index from "../client/index.html";
 import {
 	createUser,
@@ -15,9 +16,11 @@ export default {
 		const user = await getUserByUsername(username);
 		if (!user || user.password !== password) {
 			return new Response("Invalid credentials", { status: 401 });
-		} else {
-			return new Response(`Login: ${username}`);
 		}
+		return Response.json({
+			success: true,
+			sessionId: await startSession(username)
+		});
 	},
 	"/api/profile/:username": (req: Bun.BunRequest) => {
 		return new Response(`Profile: ${req.params.username}`);
@@ -28,10 +31,19 @@ export default {
 			(await getUserByUsername(username)) ??
 			(await getUserByEmail(username));
 		if (user) {
-			return new Response("User already exists", { status: 401 });
+			return Response.json({
+				success: false,
+				message: "User already exists"
+			});
 		} else {
 			await createUser(username, email, password);
-			return new Response(`Register: ${username}`);
+			return Response.json({
+				success: true,
+				sessionId: await startSession(username)
+			});
 		}
 	},
+	"/api/logout": async (req: Bun.BunRequest) => {
+		const { sessionId } = await req.json();
+	}
 };

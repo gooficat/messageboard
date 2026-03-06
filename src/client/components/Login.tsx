@@ -18,12 +18,15 @@ function Login() {
 			},
 			body: JSON.stringify(credentials),
 		}).then((response) => {
-			response.text().then((text) => {
-				console.log(text);
-				if (response.ok) {
-					window.location.href = "/";
+			response.json().then((json) => {
+				if (json.success) {
+					console.log(json.sessionId);
+					cookieStore.set({ name: "sessionId", value: json.sessionId, path: "/" }).then(() => {
+						cookieStore.get("sessionId").then((id) => console.log(id))
+						window.location.href = "/";
+					});
 				} else {
-					setError(text);
+					setError(json.message);
 				}
 			});
 		});

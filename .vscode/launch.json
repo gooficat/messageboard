@@ -5,6 +5,16 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "type": "node",
+            "request": "launch",
+            "name": "Run bun",
+            "runtimeExecutable": "bun",
+            "cwd": "${workspaceFolder}",
+            "args": [
+                "dev"
+            ]
+        },
+        {
             "type": "bun",
             "internalConsoleOptions": "neverOpen",
             "request": "launch",
