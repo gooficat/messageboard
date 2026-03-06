@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Form, FormEntry, FormSubmit } from "./Forms";
 
 function Login() {
 	const [error, setError] = useState("");
@@ -30,28 +31,13 @@ function Login() {
 
 	return (
 		<div className="w-full h-screen flex items-center justify-center">
-			<form
-				onSubmit={OnLoginSubmit}
-				className="flex-col flex max-w-sm gap-4"
-			>
-				{error && <p className="text-red">{error}</p>}
-				<input
-					className="pal-bg-grey p-2 rounded-sm"
-					type="text"
-					name="username"
-				/>
-				<input
-					className="pal-bg-grey p-2 rounded-sm"
-					type="password"
-					name="password"
-				/>
-				<button
-					className="pal-bg-highlight rounded-sm p-2"
-					type="submit"
-				>
-					Login
-				</button>
-			</form>
+			<Form onSubmit={OnLoginSubmit}>
+				{<p className="pal-text-err">{error}</p>}
+				<FormEntry name="username" />
+				<FormEntry name="password" type="password" />
+				<FormSubmit text="Login" />
+				<a className="text-center underline" href="/register">Register</a>
+			</Form>
 		</div>
 	);
 }
